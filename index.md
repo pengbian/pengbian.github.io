@@ -1,5 +1,5 @@
 ---
+layout: default
 ---
 
-#LPTUSA
-Welcome to the LPTUSA website.
+Welcome to the LP Technologies USA website.

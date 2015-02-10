@@ -1,0 +1,29 @@
+body, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, hr,
+dl, dd, ol, ul, figure {
+  margin: 0;
+  padding: 0; }
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: #eee; }
+
+.wrapper {
+  max-width: -webkit-calc(800px - (20px * 2));
+  max-width: calc(800px - (20px * 2));
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding: 20px 0 20px 0; }
+
+.wrapper:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.site-header {
+  background-color: #333; }
+
+.site-title {
+  color: white; }

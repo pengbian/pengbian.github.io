@@ -1,0 +1,46 @@
+---
+---
+
+$base-font-family: Helvetica, Arial, sans-serif;
+$background-color: #fdfdfd;
+$spacing-unit: 20px;
+
+body, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, hr,
+dl, dd, ol, ul, figure {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: $base-font-family;
+    background-color: #eee;
+}
+
+.wrapper {
+    max-width: -webkit-calc(800px - (#{$spacing-unit} * 2));
+    max-width:         calc(800px - (#{$spacing-unit} * 2));
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: $spacing-unit;
+    padding-left: $spacing-unit;
+    @extend %clearfix;
+    padding: $spacing-unit 0 $spacing-unit 0;
+}
+
+%clearfix {
+
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+.site-header {
+	background-color: #333;
+}
+
+.site-title {
+	color: white;
+}
