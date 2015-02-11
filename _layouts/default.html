@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
-  <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
-</head>
+
+{% include head.html %}
+
 <body>
 
   {% include header.html %}
 
-  <div class="page-content">
-    <div class="wrapper">
+  <div class="container">
 
       {{ content }}
 
-    </div>
   </div>
 </body>
 </html>
