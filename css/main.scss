@@ -2,4 +2,25 @@
 ---
 @charset "utf-8";
 
+.title-bold {
+	font-weight: bold;
+}
+
+.title-red {
+	color: #bc3232;
+}
+
+.navbar-brand:hover .title-red {
+	color: #952727;
+}
+
+.title-black {
+	color: #515151;
+}
+
+.navbar-brand:hover .title-black {
+	color: #383838;
+}
+
+
 @import "bootstrap";
