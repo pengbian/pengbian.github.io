@@ -2,9 +2,7 @@
 ---
 @charset "utf-8";
 
-.title-bold {
-	font-weight: bold;
-}
+@import "bootstrap";
 
 .title-red {
 	color: #bc3232;
@@ -22,5 +20,16 @@
 	color: #383838;
 }
 
+.jumbo {
+	text-align: center;
+	background-color: #777;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #e7e7e7;
+	color: #fff;
+	padding: 30px;
+}
 
-@import "bootstrap";
+.navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+}
