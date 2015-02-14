@@ -24,26 +24,27 @@ footer {
 
 .logo {
   border-radius: 6px;
-  border: 1px solid #7F7F7F;
+  border: 1px solid #727272;
   width: 32px;
   height: 32px;
   display: inline-block;
   text-align: center;
   line-height: 1.75;
-  background-color: #999999;
-  color: #ffffff;
+  background-color: #8C8C8C;
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25);
+  color: #f1f1f1;
   margin-top: -6px; }
 
 .navbar-brand:hover .logo {
-  border: 1px solid #727272;
-  background-color: #8C8C8C; }
+  color: #ffffff; }
 
 .banner {
-  background-color: #7F7F7F;
-  -webkit-box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
-  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
+  background-color: #666666;
+  -webkit-box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.25);
   min-height: 300px;
-  color: #ffffff;
+  color: #f1f1f1;
   text-align: center;
   padding: 20px 0; }
 
