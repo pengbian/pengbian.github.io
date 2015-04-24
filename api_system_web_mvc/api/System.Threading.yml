@@ -1,0 +1,14 @@
+items:
+- uid: System.Threading
+  href: System.Threading.yml
+  name: Threading
+  fullName: System.Threading
+  type: Namespace
+  source:
+    remote:
+      branch: master
+      repo: https://git01.codeplex.com/aspnetwebstack
+      description: 5fa60ca3
+    path: src/Common/TaskHelpersExtensions.cs
+    startLine: 4
+  id: System.Threading
