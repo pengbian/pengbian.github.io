@@ -139,23 +139,8 @@ a:focus {
   background-color: inherit;
   padding: 0;
 }
-h1,
-.h1,
-h2,
-.h2,
-h3,
-.h3,
-h4,
-.h4 {
-  font-family: 'Segoe UI Light', 'Segoe UI', Tahoma, Helvetica, sans-serif;
-  font-weight: 700;
-}
-h5,
-.h5 {
-  font-family: 'Segoe UI Semibold', 'Segoe UI', Tahoma, Helvetica, sans-serif;
-}
 .btn {
-  font-family: 'Segoe UI Semibold', 'Segoe UI', Tahoma, Helvetica, sans-serif;
+  font-weight: 500;
   border: 1px solid #e5e5e5;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #f1f1f1));
   background-image: -webkit-linear-gradient(#ffffff, #f1f1f1);
@@ -280,11 +265,9 @@ header .navbar {
 }
 .sidetoc {
   position: fixed;
-  float: left;
   width: 260px;
   top: 150px;
   bottom: 0;
-  overflow-y: auto;
   overflow-x: hidden;
   padding: 0px 15px 100px 15px;
   background-color: #f1f1f1;
@@ -320,7 +303,7 @@ header .navbar {
   margin-top: -4px;
 }
 .sidetoc-heading {
-  font-family: 'Segoe UI Semibold', 'Segoe UI', Tahoma, Helvetica, sans-serif;
+  font-weight: 500;
 }
 .sidetoc .nav > li > a {
   color: #666666;
@@ -346,7 +329,7 @@ header .navbar {
 }
 .sidefilter {
   position: fixed;
-  z-index: 10;
+  top: 90px;
   width: 260px;
   background-color: #f1f1f1;
   padding: 15px;
@@ -398,7 +381,7 @@ header .navbar {
 }
 .item-title {
   font-size: 16px;
-  font-family: 'Segoe UI Semibold', 'Segoe UI', Tahoma, Helvetica, sans-serif;
+  font-weight: 500;
 }
 .item-summary {
   margin-left: 10px;
@@ -490,7 +473,7 @@ footer {
 @media only screen and (max-width: 768px) {
   /* TOC display for responsive */
   #wrapper {
-    padding-top: 0;
+    padding-top: 0 !important;
   }
   header {
     position: static;
@@ -541,6 +524,9 @@ footer {
   /*.expand-all {
     display: none;
   }*/
+  .mobile-hide {
+    display: none;
+  }
 }
 
 /* GitHub Theme */
