@@ -1,0 +1,382 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class YamlUtility | </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class YamlUtility | ">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content">
+        
+        <div class="sidenav">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div class="sidetoc">
+              <iframe id="sidetoc" src="toc.html"></iframe>
+            </div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content">
+              
+              <a href="https://github.com/dotnet/docfx/blob/dev/doc/apidoc/yamlutility.md/#L5" class="btn btn-primary pull-right mobile-hide">Improve this Doc</a>
+              <a href="https://github.com/dotnet/docfx/blob/dev/src/Microsoft.DocAsCode.EntityModel/YamlUtility.cs/#L11" class="btn btn-primary pull-right mobile-hide">View Source</a>
+              <h1 id="Microsoft_DocAsCode_EntityModel_YamlUtility">Class YamlUtility</h1>
+              <div class="markdown level0 summary"></div>
+              <div class="markdown level0 conceptual"><h3 id="some-additional-information">Some additional information</h3>
+<p>I can write in <strong>bold</strong> or <em>italic</em> or add a link to another API <a class="xref" href="Microsoft.DocAsCode.EntityModel.YamlViewModelExtensions.html#Microsoft_DocAsCode_EntityModel_YamlViewModelExtensions">YamlViewModelExtensions</a> or create a simple table:</p>
+<table>
+<thead>
+<tr>
+<th>Column 1</th>
+<th>Column 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Value 1</td>
+<td>Value 2</td>
+</tr>
+<tr>
+<td>Value 3</td>
+<td>Value 4</td>
+</tr>
+<tr>
+<td>Value 5</td>
+<td>Value 6</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sample-code">Sample code</h4>
+<p>This sample code is taken from the sample code.</p>
+<pre><code class="language-csharp" name="Test Code">// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+namespace Microsoft.DocAsCode.Tests
+{
+    using EntityModel;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using Xunit;
+
+    [Collection(&quot;docfx STA&quot;)]
+    public class BuildCommandTest
+    {
+        /// &lt;summary&gt;
+        /// As similar to run docfx.exe directly: search for docfx.json in current directory
+        /// &lt;/summary&gt;
+        [Fact]
+        [Trait(&quot;Related&quot;, &quot;docfx&quot;)]
+        public void TestGetConfigWithNoInputAndDocfxJsonExists()
+        {
+            const string documentsBaseDir = &quot;documents&quot;;
+            const string outputBaseDir = &quot;output&quot;;
+            const string templateDir = &quot;template&quot;;
+            if (Directory.Exists(documentsBaseDir))
+            {
+                Directory.Delete(documentsBaseDir, true);
+            }
+            if (Directory.Exists(outputBaseDir))
+            {
+                Directory.Delete(outputBaseDir, true);
+            }
+            if (Directory.Exists(templateDir))
+            {
+                Directory.Delete(templateDir, true);
+            }
+
+            // Create default template
+            var defaultTemplate = @&quot;
+{{{conceptual}}}
+&quot;;
+            Directory.CreateDirectory(Path.Combine(templateDir, &quot;default&quot;));
+            Directory.CreateDirectory(documentsBaseDir);
+            Directory.CreateDirectory(outputBaseDir);
+            File.WriteAllText(Path.Combine(templateDir, &quot;default&quot;, &quot;Conceptual.html.tmpl&quot;), defaultTemplate);
+
+            // use `/` as it will be used in glob pattern
+            // In glob pattern, `/` is considered as file separator while `\` is considered as escape character
+            var conceptualFile = documentsBaseDir + &quot;/test.md&quot;;
+            File.WriteAllLines(
+                conceptualFile,
+                new[]
+                {
+                    &quot;---&quot;,
+                    &quot;a: b&quot;,
+                    &quot;b:&quot;,
+                    &quot;  c: e&quot;,
+                    &quot;---&quot;,
+                    &quot;# Hello World&quot;,
+                    &quot;Test XRef: @XRef1&quot;,
+                    &quot;Test link: [link text](../documents/test.md)&quot;,
+                    &quot;&lt;p&gt;&quot;,
+                    &quot;test&quot;,
+                });
+
+            new BuildCommand(new Options
+            {
+                CurrentSubCommand = CommandType.Build,
+                BuildCommand = new BuildCommandOptions
+                {
+                    Content = new List&lt;string&gt; { conceptualFile },
+                    OutputFolder = Path.Combine(Environment.CurrentDirectory, outputBaseDir),
+                    Templates = new List&lt;string&gt; { Path.Combine(templateDir, &quot;default&quot;) }
+                }
+            }
+            , null).Exec(null);
+
+            var file = Path.Combine(outputBaseDir, Path.ChangeExtension(conceptualFile, &quot;.html&quot;));
+            Assert.True(File.Exists(file));
+            // TODO: Update when XREF is implemented by @zhyan
+            Assert.Equal&lt;string&gt;(
+                new string[]
+                {
+                    &quot;&quot;,
+                    &quot;&lt;h1 id=\&quot;hello-world\&quot;&gt;Hello World&lt;/h1&gt;&quot;,
+                    &quot;&lt;p&gt;Test XRef: &lt;span class=\&quot;xref\&quot;&gt;XRef1&lt;/span&gt;&quot;,
+                    &quot;Test link: &lt;a href=\&quot;test.html\&quot;&gt;link text&lt;/a&gt;&lt;/p&gt;&quot;,
+                    &quot;&lt;p&gt;&lt;p&gt;&quot;,
+                    &quot;test&lt;/p&gt;&quot;,
+                    &quot;&quot;
+                },
+                File.ReadAllLines(file));
+        }
+    }
+}
+
+</code></pre><p>Markdown is well suited for writing rich content inside the API!</p>
+</div>
+              <div class="inheritance">
+                <h5>Inheritance</h5>
+                  <div class="level0"><span class="xref">System.Object</span></div>
+                  <div class="level1"><span class="xref">YamlUtility</span></div>
+              </div>
+              <h6><strong>Namespace</strong>:Microsoft.DocAsCode.EntityModel</h6>
+              <h6><strong>Assembly</strong>:Microsoft.DocAsCode.EntityModel.dll</h6>
+              <h5 id="Microsoft_DocAsCode_EntityModel_YamlUtility_syntax">Syntax</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public class YamlUtility</code></pre>
+              </div>
+              <h3 id="methods">Methods</h3>
+              
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/dotnet/docfx/blob/dev/src/Microsoft.DocAsCode.EntityModel/YamlUtility.cs/#L35">View Source</a>
+              </span>
+              <h4 id="Microsoft_DocAsCode_EntityModel_YamlUtility_Deserialize__1_System_IO_TextReader_">Deserialize&lt;T&gt;(TextReader)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static T Deserialize&lt;T&gt;(TextReader reader)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.IO.TextReader</span></td>
+                    <td><em>reader</em></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">T</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/dotnet/docfx/blob/dev/src/Microsoft.DocAsCode.EntityModel/YamlUtility.cs/#L40">View Source</a>
+              </span>
+              <h4 id="Microsoft_DocAsCode_EntityModel_YamlUtility_Deserialize__1_System_String_">Deserialize&lt;T&gt;(String)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static T Deserialize&lt;T&gt;(string path)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><em>path</em></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              <h5 class="returns">Returns</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">T</span></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/dotnet/docfx/blob/dev/src/Microsoft.DocAsCode.EntityModel/YamlUtility.cs/#L16">View Source</a>
+              </span>
+              <h4 id="Microsoft_DocAsCode_EntityModel_YamlUtility_Serialize_System_IO_TextWriter_System_Object_">Serialize(TextWriter, Object)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static void Serialize(TextWriter writer, object graph)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.IO.TextWriter</span></td>
+                    <td><em>writer</em></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Object</span></td>
+                    <td><em>graph</em></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <span class="small pull-right mobile-hide">
+                <a href="https://github.com/dotnet/docfx/blob/dev/src/Microsoft.DocAsCode.EntityModel/YamlUtility.cs/#L21">View Source</a>
+              </span>
+              <h4 id="Microsoft_DocAsCode_EntityModel_YamlUtility_Serialize_System_String_System_Object_">Serialize(String, Object)</h4>
+              <div class="markdown level1 summary"></div>
+              <div class="markdown level1 conceptual"></div>
+              <h5 class="decalaration">Declaration</h5>
+              <div class="codewrapper">
+                <pre><code class="lang-csharp hljs">public static void Serialize(string path, object graph)</code></pre>
+              </div>
+              <h5 class="parameters">Parameters</h5>
+              <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                  <tr>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="xref">System.String</span></td>
+                    <td><em>path</em></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td><span class="xref">System.Object</span></td>
+                    <td><em>graph</em></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+            <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+            </nav>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright © 2015 Microsoft<br>Powered by Doc-as-Code</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
